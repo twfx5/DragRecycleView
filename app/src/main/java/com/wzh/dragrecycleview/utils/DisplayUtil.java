@@ -3,7 +3,7 @@ package com.wzh.dragrecycleview.utils;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-import com.wzh.dragrecycleview.MovieApp;
+import com.wzh.dragrecycleview.MoveApp;
 
 /**
  * <p/>
@@ -53,7 +53,7 @@ public class DisplayUtil {
 
     public static int getScreenWidth() {
         if (screenWidth == 0) {
-            DisplayMetrics dm = MovieApp.getInstance().getResources().getDisplayMetrics();
+            DisplayMetrics dm = MoveApp.getInstance().getResources().getDisplayMetrics();
             screenWidth = dm.widthPixels;
         }
         return screenWidth;
@@ -61,14 +61,14 @@ public class DisplayUtil {
 
     public static int getScreenHeight() {
         if (screenHeight == 0) {
-            DisplayMetrics dm = MovieApp.getInstance().getResources().getDisplayMetrics();
+            DisplayMetrics dm = MoveApp.getInstance().getResources().getDisplayMetrics();
             screenHeight = dm.heightPixels;
         }
         return screenHeight;
     }
 
     public static float getDisplayDensity() {
-        return MovieApp.getInstance().getResources().getDisplayMetrics().density;
+        return MoveApp.getInstance().getResources().getDisplayMetrics().density;
     }
 
     public static int dp2px(float dipValue) {

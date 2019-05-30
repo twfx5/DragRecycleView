@@ -107,7 +107,7 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, width);
         if (holder instanceof MyViewHolder) {
             int id = mDatas.get(position);
@@ -115,6 +115,14 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<RecyclerView.View
             ((MyViewHolder)(holder)).ivImage.setImageResource(id);
         } else if (holder instanceof DefaultViewHolder){
             ((DefaultViewHolder)(holder)).ivAdd.setLayoutParams(layoutParams);
+            ((DefaultViewHolder)(holder)).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mAddListener != null) {
+                        mAddListener.add(position);
+                    }
+                }
+            });
         }
     }
 
@@ -128,14 +136,9 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    //根据用户的手势，交换Adapter数据集中item的位置
+    // 根据用户的手势，交换Adapter数据集中item的位置
     @Override
     public boolean onItemMove(int fromPos, int toPos) {
-//        if (getItemViewType(fromPos) == ICON_ADD_ITEM ||
-//                getItemViewType(toPos) == ICON_ADD_ITEM) {
-//            Log.d("111", "onItemMove: ");
-//            return false;
-//        }
         Collections.swap(mDatas, fromPos, toPos);
         notifyItemMoved(fromPos, toPos);
         return true;
@@ -146,11 +149,11 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<RecyclerView.View
 //        notifyItemInserted(pos);
 //    }
 
-    public void removeData(int pos) {
-        mDatas.remove(pos);
-        notifyDataSetChanged();
-        notifyItemRemoved(pos);
-    }
+//    public void removeData(int pos) {
+//        mDatas.remove(pos);
+//        notifyDataSetChanged();
+//        notifyItemRemoved(pos);
+//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView ivImage;

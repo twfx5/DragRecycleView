@@ -17,6 +17,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private EditText et;
     private RecyclerView rv;
     private Button bt;
@@ -36,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         mList.add(R.drawable.ic_circleoffriends);
         mList.add(R.drawable.ic_copy);
-        mList.add(R.drawable.ic_dynamic);
-        mList.add(R.drawable.ic_qq);
-        mList.add(R.drawable.ic_qqzone);
+//        mList.add(R.drawable.ic_dynamic);
+//        mList.add(R.drawable.ic_qqzone);
     }
 
     private void initView() {
+        LinearLayout contain = findViewById(R.id.layout_contain);
         et = findViewById(R.id.et);
         rv = findViewById(R.id.rv);
         bt = findViewById(R.id.bt);
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(3, DisplayUtil.dp2px(6), DisplayUtil.dp2px(6), false);
         rv.addItemDecoration(itemDecoration);
         rv.setAdapter(selectedPhotoAdapter);
+        selectedPhotoAdapter.setAddListener(new SelectedPhotoAdapter.OnAddListener() {
+            @Override
+            public void add(int pos) {
+                mList.add(R.drawable.ic_qq);
+                selectedPhotoAdapter.notifyDataSetChanged();
+
+            }
+        });
 
         //初始化ItemTouchHelper实例
         ItemTouchHelperCallback callback = new ItemTouchHelperCallback(selectedPhotoAdapter);

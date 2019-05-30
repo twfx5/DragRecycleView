@@ -2,11 +2,11 @@ package com.wzh.dragrecycleview;
 
 import android.app.Application;
 
-public class MovieApp extends Application {
+public class MoveApp extends Application {
 
-    public static MovieApp mInstance;
+    public static MoveApp mInstance;
 
-    public static MovieApp getInstance() {
+    public static MoveApp getInstance() {
         return mInstance;
     }
 
