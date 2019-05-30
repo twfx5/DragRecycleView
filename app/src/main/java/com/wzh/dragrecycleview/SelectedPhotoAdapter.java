@@ -139,7 +139,15 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<RecyclerView.View
     // 根据用户的手势，交换Adapter数据集中item的位置
     @Override
     public boolean onItemMove(int fromPos, int toPos) {
-        Collections.swap(mDatas, fromPos, toPos);
+        if (fromPos < toPos) {
+            for (int i = fromPos; i < toPos; i++) {
+                Collections.swap(mDatas, i, i + 1);
+            }
+        }else{
+            for (int i = fromPos; i > toPos; i--) {
+                Collections.swap(mDatas, i, i - 1);
+            }
+        }
         notifyItemMoved(fromPos, toPos);
         return true;
     }
